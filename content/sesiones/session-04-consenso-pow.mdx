@@ -1,1 +1,38 @@
+---
+titulo: "Mecanismos de consenso I: Proof of Work"
+fecha: "Miércoles · 15 de octubre, 17:00–19:00h"
+bloque: "Consenso"
+ra: ["RA3.1", "RA3.2"]
+competencias: ["CE2"]
+---
 
+import { LabCallout } from '../../app/(components)/LabCallout'
+import { ResourceList } from '../../app/(components)/ResourceList'
+
+### Objetivos de la Sesión
+- Explicar por qué es necesario el consenso en un entorno P2P sin confianza.
+- Describir el mecanismo de Proof of Work (PoW) y el concepto de *hash rate*.
+- Analizar las implicaciones económicas, éticas y ambientales del PoW.
+
+### Contenidos Teóricos
+1.  **El Problema de los Generales Bizantinos (BFT):** ¿Cómo se ponen de acuerdo partes que no confían entre sí?
+2.  **La Minería y el Nonce:** Encontrar un hash objetivo (con ceros iniciales) como prueba de gasto energético.
+3.  **Incentivos Económicos:** Recompensa de bloque, comisiones y el modelo de seguridad.
+4.  **Análisis Crítico:** El ataque del 51% y la huella de carbono del PoW.
+
+> Proof of Work utiliza la energía como un mecanismo de votación para garantizar que alterar el pasado sea más costoso que participar honestamente en el futuro.
+
+### Actividades y Debate
+-   **Debate Ético/Económico:** ¿Es PoW sostenible a largo plazo? ¿Qué desafíos regulatorios impone su consumo energético masivo?
+-   **Cálculo Simple:** Si la dificultad requiere 100 trillones de intentos, ¿cuánta potencia se necesita?
+
+### Lecturas y Recursos
+<ResourceList
+  items={[
+    { label: 'Artículo: Implicaciones ambientales del Proof of Work (UNEP)', href: '#' },
+    { label: 'Concepto: El ataque del 51% y sus costes', href: '#' }
+  ]}
+/>
+
+### Evaluación Formativa
+-   *One-minute paper*: Define PoW en una frase y explica por qué su alto coste energético es una característica, no un error.
