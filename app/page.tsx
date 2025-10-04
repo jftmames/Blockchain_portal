@@ -1,55 +1,46 @@
-import Link from 'next/link';
-import { sesiones } from '@/data/sesiones';
+import { getSessionMDX } from '@/lib/mdx';
+import { notFound } from 'next/navigation';
+import { Progreso } from '@/app/(components)/Progreso';
+import { SesionMeta, sesiones } from '@/data/sesiones';
 
-export default function Home() {
-  // Filtramos para mostrar las sesiones futuras, o las 4 primeras si todas son pasadas
-  const now = new Date();
-  const proximasSesiones = sesiones
-    .filter(s => new Date(s.fechaISO) > now)
-    .slice(0, 4);
+// Función estática requerida por Next.js para generar las rutas (SSG)
+export async function generateStaticParams() {
+    return sesiones.map(s => ({ slug: s.slug }));
+}
 
-  const sesionesAMostrar = proximasSesiones.length > 0 ? proximasSesiones : sesiones.slice(0, 4);
+// Tipado directo en línea para evitar el conflicto con tipos globales de Next.js
+export default async function Sesion({ params }: { params: { slug: string } }) {
+  let mdx, frontmatter: SesionMeta;
+  const { slug } = params; 
+  
+  try {
+    ({ mdx, frontmatter } = await getSessionMDX(slug));
+  } catch (e) {
+    console.error(`Error loading session ${slug}:`, e.message);
+    notFound(); 
+  }
 
   return (
-    <section className="space-y-8">
-      <div className='pb-4'>
-        <h1 className="text-4xl font-extrabold tracking-tight">Blockchain: Fundamentos técnicos y problemática jurídica</h1>
-        <p className="text-lg text-gray-700 max-w-4xl mt-3">
-          Portal de la asignatura con contenidos teóricos, laboratorios guiados y recursos. 
-          Un enfoque integral: de los hashes al código y de los contratos a la jurisprudencia.
-        </p>
-      </div>
-      
-      {/* Tarjetas de acceso rápido */}
-      <div className="grid md:grid-cols-3 gap-6">
-        <Link href="/programa" className="border rounded-xl p-5 hover:bg-gray-50 transition-colors space-y-1">
-            <h2 className="text-xl font-semibold">Programa Completo</h2>
-            <p className="text-sm text-gray-600">Visión de 15 semanas y objetivos de aprendizaje.</p>
-        </Link>
-        <Link href="/sesiones" className="border rounded-xl p-5 hover:bg-gray-50 transition-colors space-y-1">
-            <h2 className="text-xl font-semibold">Índice de Sesiones (30)</h2>
-            <p className="text-sm text-gray-600">Accede a las lecturas, labs y actividades de cada clase.</p>
-        </Link>
-        <Link href="/evaluacion" className="border rounded-xl p-5 hover:bg-gray-50 transition-colors space-y-1">
-            <h2 className="text-xl font-semibold">Rúbricas y EEE</h2>
-            <p className="text-sm text-gray-600">Consulta los criterios de evaluación y el Proyecto Final.</p>
-        </Link>
-      </div>
+    <article className="max-w-4xl mx-auto">
+        <header className="mb-8 border-b pb-4">
+            <h1 className="text-3xl font-extrabold tracking-tight">{frontmatter.titulo}</h1>
+            <p className="text-lg text-gray-600 mt-1">{frontmatter.bloque} · {frontmatter.fechaStr}</p>
+            
+            <div className='mt-4'>
+                <Progreso slug={slug} /> 
+            </div>
+        </header>
 
-      {/* Listado de próximas sesiones */}
-      <div className='pt-4'>
-        <h2 className="text-2xl font-semibold mb-3">Próximas Sesiones</h2>
-        <ul className="space-y-3">
-          {sesionesAMostrar.map(s => (
-            <li key={s.slug} className="border-l-4 border-blue-500 pl-4 py-2 hover:bg-blue-50 transition-colors rounded-r-md">
-                <Link href={`/sesiones/${s.slug}`} className="block">
-                    <span className="font-medium">{s.titulo}</span> — 
-                    <span className="text-sm text-gray-600 ml-2">{s.fechaStr}</span>
-                </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+        <div className="prose max-w-none prose-lg prose-headings:font-semibold prose-a:text-blue-600 prose-a:underline">
+            {mdx}
+        </div>
+        
+        <footer className='mt-12 pt-6 border-t'>
+            <p className='text-sm text-gray-500'>
+                **Resultados de Aprendizaje (RA):** {frontmatter.ra?.join(', ') || 'No definidos'}<br/>
+                **Competencias:** {frontmatter.competencias?.join(', ') || 'No definidas'}
+            </p>
+        </footer>
+    </article>
   );
 }
