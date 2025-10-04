@@ -3,20 +3,27 @@ import { notFound } from 'next/navigation';
 import { Progreso } from '@/app/(components)/Progreso';
 import { SesionMeta, sesiones } from '@/data/sesiones';
 
-// Función estática requerida por Next.js para generar las rutas durante el build (SSG)
+// 1. Definimos la interfaz de las props que Next.js le pasa a esta página
+interface SesionPageProps {
+    params: {
+        slug: string;
+    };
+    // El App Router puede inyectar otros props como searchParams, pero solo params es obligatorio aquí.
+}
+
+// Fun: Permite a Next.js generar previamente todas las rutas de sesión
 export async function generateStaticParams() {
-    // Retorna todos los slugs definidos en data/sesiones.ts
     return sesiones.map(s => ({ slug: s.slug }));
 }
 
-export default async function Sesion({ params }: { params: { slug: string } }) {
+// 2. Tipificamos el componente Sesion con la nueva interfaz
+export default async function Sesion({ params }: SesionPageProps) {
   let mdx, frontmatter: SesionMeta;
   
   try {
     // Carga, compila y valida el archivo MDX correspondiente al slug
     ({ mdx, frontmatter } = await getSessionMDX(params.slug));
   } catch (e) {
-    // Si falla la carga del archivo o la validación, muestra 404
     console.error(`Error loading session ${params.slug}:`, e.message);
     notFound(); 
   }
