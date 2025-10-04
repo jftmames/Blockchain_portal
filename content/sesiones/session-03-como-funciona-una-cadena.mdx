@@ -1,1 +1,39 @@
+---
+titulo: "Cómo funciona una cadena de bloques"
+fecha: "Martes · 14 de octubre, 17:00–19:00h"
+bloque: "Arquitectura"
+ra: ["RA2.1", "RA2.2"]
+competencias: ["CB2"]
+---
 
+import { LabCallout } from '../../app/(components)/LabCallout'
+import { ResourceList } from '../../app/(components)/ResourceList'
+
+### Objetivos de la Sesión
+- Describir la estructura interna de un bloque (transacciones, nonce, hash anterior).
+- Entender el concepto de la *Blockchain* como un *Merkle Tree* y la finalidad de la minería.
+- Diferenciar entre la capa de red (P2P) y la capa de datos (la cadena en sí).
+
+### Contenidos Teóricos
+1.  **La Estructura del Bloque:** Cabecera, cuerpo y el papel del *nonce*.
+2.  **El Enlace Criptográfico:** Cómo el hash del bloque anterior garantiza la inmutabilidad de la cadena.
+3.  **Transacciones y Merkle Tree:** Cómo se consolidan miles de transacciones en un solo hash.
+4.  **Modelo de Propagación:** Nodos completos, nodos ligeros y la difusión de bloques.
+
+> La inmutabilidad de la cadena es una propiedad emergente de la criptografía y el consenso distribuido, no una característica intrínseca.
+
+<LabCallout title="Laboratorio 2: Clave Pública y Firma Digital (RSA)" href="/content/labs/rsa-simplificado-colab.md">
+Genera pares de claves (Pública/Privada) y úsalas para simular una firma digital de una transacción.
+</LabCallout>
+
+### Actividades y Debate
+-   **Taller de Conceptos:** Dibuja el diagrama de cómo se enlaza el Bloque 10 con el Bloque 11. ¿Qué ocurriría si un atacante cambiara una transacción en el Bloque 5?
+-   **Discusión Jurídica:** Si una transacción es "inválida" legalmente (e.g., coacción), pero "válida" técnicamente (firmada y minada), ¿qué prevalece?
+
+### Lecturas y Recursos
+<ResourceList
+  items={[
+    { label: 'Capítulo 2: El Enlace Criptográfico y la Cadena (Libro de Texto)', href: '#' },
+    { label: 'Documentación oficial: Merkle Trees Explained', href: '#' }
+  ]}
+/>
