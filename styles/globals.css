@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Asegura que los bloques de código (pre) sean desplazables horizontalmente */
+.prose pre { overflow: auto; }
