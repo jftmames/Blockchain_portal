@@ -1,4 +1,4 @@
-import '../../styles/globals.css'; // Probaremos subir DOS niveles si Next.js lo evalúa desde /app/sesiones/[slug]
+import '/styles/globals.css';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
