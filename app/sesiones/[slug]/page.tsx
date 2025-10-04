@@ -3,12 +3,11 @@ import { notFound } from 'next/navigation';
 import { Progreso } from '@/app/(components)/Progreso';
 import { SesionMeta, sesiones } from '@/data/sesiones';
 
-// Función estática requerida por Next.js para generar las rutas (SSG)
 export async function generateStaticParams() {
     return sesiones.map(s => ({ slug: s.slug }));
 }
 
-// Tipado directo en línea para evitar el conflicto con tipos globales de Next.js
+// Tipado directo en línea
 export default async function Sesion({ params }: { params: { slug: string } }) {
   let mdx, frontmatter: SesionMeta;
   const { slug } = params; 
