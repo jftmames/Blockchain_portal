@@ -1,24 +1,27 @@
+// app/sesiones/[slug]/page.tsx
+
 import { getSessionMDX } from '@/lib/mdx';
 import { notFound } from 'next/navigation';
 import { Progreso } from '@/app/(components)/Progreso';
 import { SesionMeta, sesiones } from '@/data/sesiones';
-
-// Eliminamos la interfaz SesionPageProps
 
 // Función estática requerida por Next.js para generar las rutas (SSG)
 export async function generateStaticParams() {
     return sesiones.map(s => ({ slug: s.slug }));
 }
 
-// Tipificamos los parámetros directamente en la desestructuración de la función.
+// Usamos la desestructuración de props.params directamente en la función
+// para que TypeScript infiera el tipo correctamente y evitemos el conflicto de PageProps.
 export default async function Sesion({ params }: { params: { slug: string } }) {
   let mdx, frontmatter: SesionMeta;
+  const { slug } = params; // Desestructuramos el slug de params (CORREGIDO)
   
   try {
-    // Carga, compila y valida el archivo MDX correspondiente al slug de la URL
-    ({ mdx, frontmatter } = await getSessionMDX(params.slug));
+    // Usamos el 'slug' desestructurado.
+    ({ mdx, frontmatter } = await getSessionMDX(slug));
   } catch (e) {
-    console.error(`Error loading session ${params.slug}:`, e.message);
+    // Usamos 'slug' en el error logging y notFound, si se prefiere.
+    console.error(`Error loading session ${slug}:`, e.message);
     notFound(); 
   }
 
@@ -29,7 +32,8 @@ export default async function Sesion({ params }: { params: { slug: string } }) {
             <p className="text-lg text-gray-600 mt-1">{frontmatter.bloque} · {frontmatter.fechaStr}</p>
             
             <div className='mt-4'>
-                <Progreso slug={params.slug} />
+                {/* Usamos params.slug o slug para Progreso, ambos son válidos */}
+                <Progreso slug={slug} /> 
             </div>
         </header>
 
