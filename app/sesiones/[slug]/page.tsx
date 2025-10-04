@@ -1,5 +1,3 @@
-// app/sesiones/[slug]/page.tsx
-
 import { getSessionMDX } from '@/lib/mdx';
 import { notFound } from 'next/navigation';
 import { Progreso } from '@/app/(components)/Progreso';
@@ -10,17 +8,14 @@ export async function generateStaticParams() {
     return sesiones.map(s => ({ slug: s.slug }));
 }
 
-// Usamos la desestructuración de props.params directamente en la función
-// para que TypeScript infiera el tipo correctamente y evitemos el conflicto de PageProps.
+// Tipado directo en línea para evitar el conflicto con tipos globales de Next.js
 export default async function Sesion({ params }: { params: { slug: string } }) {
   let mdx, frontmatter: SesionMeta;
-  const { slug } = params; // Desestructuramos el slug de params (CORREGIDO)
+  const { slug } = params; 
   
   try {
-    // Usamos el 'slug' desestructurado.
     ({ mdx, frontmatter } = await getSessionMDX(slug));
   } catch (e) {
-    // Usamos 'slug' en el error logging y notFound, si se prefiere.
     console.error(`Error loading session ${slug}:`, e.message);
     notFound(); 
   }
@@ -32,7 +27,6 @@ export default async function Sesion({ params }: { params: { slug: string } }) {
             <p className="text-lg text-gray-600 mt-1">{frontmatter.bloque} · {frontmatter.fechaStr}</p>
             
             <div className='mt-4'>
-                {/* Usamos params.slug o slug para Progreso, ambos son válidos */}
                 <Progreso slug={slug} /> 
             </div>
         </header>
