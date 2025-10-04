@@ -1,4 +1,3 @@
-// app/proyecto-final/page.tsx
 export default function ProyectoFinal() {
   return (
     <section className="prose max-w-4xl mx-auto space-y-6">
