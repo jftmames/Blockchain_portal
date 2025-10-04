@@ -1,0 +1,41 @@
+---
+titulo: "Qué es Blockchain y por qué importa"
+fecha: "Martes · 7 de octubre, 17:00–19:00h"
+bloque: "Introducción"
+ra: ["RA1.1", "RA1.2"]
+competencias: ["CB1", "CE1"]
+---
+
+import { LabCallout } from '../../app/(components)/LabCallout'
+import { ResourceList } from '../../app/(components)/ResourceList'
+
+### Objetivos de la Sesión
+- Definir qué es una cadena de bloques a nivel técnico (bloque, hash, P2P).
+- Comprender la promesa de la confianza distribuida y su impacto en el derecho.
+
+### Contenidos Teóricos
+1.  **El Problema de la Confianza:** Intermediarios, contratos y la prueba digital.
+2.  **Arquitectura Mínima:** Bloque, hash (`SHA-256`), enlace y *timestamp*.
+3.  **Red P2P y Nodos:** Quién posee la copia y la inmutabilidad como garantía.
+
+> La principal innovación de Blockchain no es el dinero, sino la capacidad de alcanzar un consenso inmutable sin una autoridad central.
+
+<LabCallout title="Laboratorio 1: Hash Demo en Colab" href="https://colab.research.google.com/drive/1-demo-hash-sha256">
+Calcula hashes SHA-256 de diferentes textos y observa la reacción en cadena (efecto avalancha) ante un cambio mínimo.
+</LabCallout>
+
+### Actividades y Debate
+-   **Minicaso Práctico:** ¿Cómo usaría un abogado el hash de un documento para probar su existencia y contenido en un momento dado? Implicaciones en la cadena de custodia.
+-   **Debate:** ¿Es un *smart contract* un contrato, un *trust* o un código?
+
+### Lecturas y Recursos
+<ResourceList
+  items={[
+    { label: 'Nakamoto (2008) — Bitcoin Whitepaper (Secciones 1 y 3)', href: '#' },
+    { label: 'Vídeo: Blockchain explicado en 10 min (YouTube)', href: '#' },
+    { label: 'Artículo: El concepto de "prueba" en la era digital (UNIE Revista)', href: '#' }
+  ]}
+/>
+
+### Evaluación Formativa
+-   *One-minute paper*: Explica en 5 líneas cómo el hash garantiza la "integridad" de un bloque.
