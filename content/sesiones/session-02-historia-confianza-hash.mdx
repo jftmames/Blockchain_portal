@@ -1,1 +1,36 @@
+---
+titulo: "Historia de la confianza: del contrato al hash"
+fecha: "Miércoles · 8 de octubre, 17:00–19:00h"
+bloque: "Introducción"
+ra: ["RA1.2", "RA2.1"]
+competencias: ["CE1"]
+---
 
+import { LabCallout } from '../../app/(components)/LabCallout'
+import { ResourceList } from '../../app/(components)/ResourceList'
+
+### Objetivos de la Sesión
+- Entender el problema histórico de la doble contabilidad y la necesidad de un tercero de confianza.
+- Definir qué es una función hash y comprender sus propiedades criptográficas clave (determinismo, efecto avalancha, resistencia a colisiones).
+- Relacionar el hash con el concepto de integridad de la prueba digital.
+
+### Contenidos Teóricos
+1.  **Sistemas de Confianza:** De la tradición oral al notario y al banco central.
+2.  **Criptografía Primitiva (Hashing):** SHA-256 como herramienta de verificación de integridad.
+3.  **El Hash como Prueba:** Aplicación legal en la custodia de documentos y la prueba de existencia (sellado de tiempo).
+
+> El hash no es un cifrado. Es una huella digital única e irreversible que prueba que un contenido no ha sido modificado.
+
+### Actividades y Debate
+-   **Minicaso Práctico:** El uso de *timestamping* criptográfico. Si un contrato se registra con un hash, ¿qué prueba exactamente la cadena? ¿La validez legal o solo la inmutabilidad de su contenido?
+
+### Lecturas y Recursos
+<ResourceList
+  items={[
+    { label: 'Artículo: Funciones Hash Criptográficas y su impacto legal (Revista UNIE)', href: '#' },
+    { label: 'Vídeo: Qué es el Efecto Avalancha en Criptografía', href: '#' }
+  ]}
+/>
+
+### Evaluación Formativa
+-   *One-minute paper*: Si modificas un único bit en un documento de 1MB, ¿cuánto cambia su hash SHA-256?
