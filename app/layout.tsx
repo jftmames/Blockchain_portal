@@ -1,14 +1,13 @@
 // app/layout.tsx
 
-// IMPORTACIÓN CORREGIDA: Usa la ruta relativa para subir un nivel y encontrar 'styles/globals.css'
-import '../styles/globals.css';
+// SOLUCIÓN FINAL: Usamos la ruta absoluta desde la raíz del proyecto para asegurar la carga en producción.
+import '/styles/globals.css';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="es">
-      {/* Las clases de Tailwind aplicadas aquí (min-h-screen, bg-white, etc.) */}
       <body className="min-h-screen bg-white text-gray-900 antialiased">
         <header className="border-b sticky top-0 z-10 bg-white/95 backdrop-blur-sm">
           <div className="mx-auto max-w-6xl px-4 py-3 flex items-center gap-6">
