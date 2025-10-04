@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // Rutas donde Tailwind buscará clases
   content: [
-    './app/**/*.{ts,tsx,mdx}', 
-    './content/**/*.{md,mdx}', 
-    './app/(components)/**/*.{ts,tsx}'
+    // La ruta más simple y efectiva para Next.js App Router
+    './app/**/*.{js,ts,jsx,tsx,mdx}', 
+    './content/**/*.{md,mdx}',
+    // Esto cubre todos los archivos, incluyendo los componentes en app/(components)
   ],
   theme: { 
     extend: {} 
