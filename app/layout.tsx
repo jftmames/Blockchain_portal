@@ -1,7 +1,4 @@
-// app/layout.tsx
-
-// SOLUCIÓN FINAL: Usamos la ruta absoluta desde la raíz del proyecto para asegurar la carga en producción.
-import '/styles/globals.css';
+import '/styles/globals.css'; 
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
